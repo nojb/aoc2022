@@ -9,6 +9,7 @@ function computesize(t)
       end
    end
    t.size = sum
+   return t
 end
 
 function classify(s)
@@ -60,23 +61,24 @@ function build()
    return fs
 end
 
-function collect(t)
-   local sum
-   if t.size <= 100000 then
-      sum = t.size
-   else
-      sum = 0
-   end
-   for i, v in pairs(t.entries) do
-      if type(v) == "table" then
-         sum = sum + collect(v)
+function foreach(t, f)
+   local todo = { [0] = t }
+   while next(todo) do
+      local t = table.remove(todo)
+      f(t)
+      for _, v in pairs(t.entries) do
+         if type(v) == "table" then
+            table.insert(todo, v)
+         end
       end
    end
-   return sum
 end
 
-fs = build()
+function main()
+   local fs = computesize(build())
+   local tot = 0
+   foreach(fs, function (t) if t.size <= 100000 then tot = tot + t.size end end)
+   return tot
+end
 
-computesize(fs)
-
-print(collect(fs))
+print(main())

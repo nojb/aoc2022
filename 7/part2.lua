@@ -9,6 +9,7 @@ function computesize(t)
       end
    end
    t.size = sum
+   return t
 end
 
 function classify(s)
@@ -60,34 +61,31 @@ function build()
    return fs
 end
 
-function linearize(res, t)
-   table.insert(res, t)
-   for i, v in pairs(t.entries) do
-      if type(v) == "table" then
-         linearize(res, v)
+function foreach(t, f)
+   local todo = { [0] = t }
+   while next(todo) do
+      local t = table.remove(todo)
+      f(t)
+      for _, v in pairs(t.entries) do
+         if type(v) == "table" then
+            table.insert(todo, v)
+         end
       end
    end
 end
 
-fs = build()
-
-computesize(fs)
-
-all = {}
-
-linearize(all, fs)
-
-free = 70000000 - fs.size
-
-req = 30000000
-
-need = req - free
-
-table.sort(all, function (a, b) return a.size < b.size end)
-
-for i, v in ipairs(all) do
-   if v.size >= need then
-      print(v.size)
-      break
+function main()
+   local fs = computesize(build())
+   local reqd, free = 30000000, 70000000 - fs.size
+   local need = reqd - free
+   local all = {}
+   foreach(fs, function (t) table.insert(all, t) end)
+   table.sort(all, function (a, b) return a.size < b.size end)
+   for i, v in ipairs(all) do
+      if v.size >= need then
+         return v.size
+      end
    end
 end
+
+print(main())
