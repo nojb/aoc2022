@@ -60,29 +60,23 @@ function build()
    return fs
 end
 
-function collect(accu, t)
+function collect(t)
+   local sum
    if t.size <= 100000 then
-      table.insert(accu, t)
+      sum = t.size
+   else
+      sum = 0
    end
    for i, v in pairs(t.entries) do
       if type(v) == "table" then
-         collect(accu, v)
+         sum = sum + collect(v)
       end
    end
+   return sum
 end
 
 fs = build()
 
 computesize(fs)
 
-selected = {}
-
-collect(selected, fs)
-
-sum = 0
-
-for _, v in pairs(selected) do
-   sum = sum + v.size
-end
-
-print(sum)
+print(collect(fs))
