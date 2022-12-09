@@ -11,22 +11,24 @@ function move(t, x)
    else
       assert(nil)
    end
-   if math.abs(T.x - H.x) >= 2 or math.abs(T.y - H.y) >= 2 then -- need to move T
-      if T.x < H.x then
-         T.x = T.x + 1
-      elseif H.x < T.x then
-         T.x = T.x - 1
-      end
-      if T.y < H.y then
-         T.y = T.y + 1
-      elseif H.y < T.y then
-         T.y = T.y - 1
-      end
-      if not t.visited[T.x] then
-         t.visited[T.x] = {}
-      end
-      t.visited[T.x][T.y] = true
+   if math.abs(T.x - H.x) < 2 and math.abs(T.y - H.y) < 2 then
+      return
    end
+   -- need to move T
+   if T.x < H.x then
+      T.x = T.x + 1
+   elseif H.x < T.x then
+      T.x = T.x - 1
+   end
+   if T.y < H.y then
+      T.y = T.y + 1
+   elseif H.y < T.y then
+      T.y = T.y - 1
+   end
+   if not t.visited[T.x] then
+      t.visited[T.x] = {}
+   end
+   t.visited[T.x][T.y] = true
 end
 
 function main()
