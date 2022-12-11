@@ -4,7 +4,8 @@ end
 
 function doround(t)
    -- To avoid overflow, we reduce every worry level by the product of divisors
-   -- used by every monkey; this operation leaves the modulo results invariant.
+   -- used by every monkey; this operation leaves the result of [worry % x.test]
+   -- invariant for every [x].
    local m = 1
    for _, x in ipairs(t) do
       m = m * x.test
