@@ -1,7 +1,11 @@
 LUA = lua
 
 .PHONY: all
-all:
-	@git ls-files '*.lua' | while read f; do \
-	  $(LUA) $$f < $$(dirname $$f)/input > $${f%.lua}.output; \
-	done
+all: $(patsubst %.lua,%.output,$(wildcard */*.lua))
+
+.PHONY: clean
+clean:
+	rm -f $(patsubst %.lua,%.output,$(wildcard */*.lua))
+
+%.output: %.lua
+	$(LUA) $< < $(dir $<)input > $@
