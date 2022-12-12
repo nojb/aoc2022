@@ -45,7 +45,7 @@ function size(G)
 end
 
 -- M = memoization table mapping (Si, Sj) to the shortest path to E
--- V = set of visited positions (to avoid looping)
+-- k = max number of steps to take
 -- G = height grid
 -- Si, Sj = starting position
 -- Ei, Ej = ending position
