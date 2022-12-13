@@ -69,7 +69,6 @@ end
 
 function parsepacket(s)
    local x = parselist(s, 1)
-   if not x or not x.d then print(s) end
    assert(x.i == string.len(s) + 1)
    return x.d
 end

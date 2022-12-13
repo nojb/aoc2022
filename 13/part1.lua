@@ -67,23 +67,8 @@ function parselist(s, i)
    return { d = t, i = i }
 end
 
--- function printlist(t)
---    if type(t) == "number" then
---       io.write(tostring(t))
---    else -- table
---       io.write('[')
---       for i, v in pairs(t) do
---          -- print(i, v, 'x')
---          if i > 1 then io.write(',') end
---          printlist(v)
---       end
---       io.write(']')
---    end
--- end
-
 function parsepacket(s)
    local x = parselist(s, 1)
-   if not x or not x.d then print(s) end
    assert(x.i == string.len(s) + 1)
    return x.d
 end
@@ -100,7 +85,7 @@ function main()
       end
       i = i + 1
    until not (io.read())
-   print(tot)
+   return tot
 end
 
-main()
+print(main())
