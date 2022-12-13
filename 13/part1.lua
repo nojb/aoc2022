@@ -1,4 +1,4 @@
-function compare(t1, t2, i)
+function compare2(t1, t2, i)
    if i > #t1 and i <= #t2 then
       return -1
    elseif i > #t2 and i <= #t1 then
@@ -14,19 +14,23 @@ function compare(t1, t2, i)
          elseif x2 < x1 then
             return 1
          else
-            return compare(t1, t2, i + 1)
+            return compare2(t1, t2, i + 1)
          end
       else -- type(x1) == "table" or type(x2) == "table"
          if type(x1) == "number" then x1 = {x1} end
          if type(x2) == "number" then x2 = {x2} end
-         local c = compare(x1, x2, 1)
+         local c = compare2(x1, x2, 1)
          if c == 0 then
-            return compare(t1, t2, i + 1)
+            return compare2(t1, t2, i + 1)
          else
             return c
          end
       end
    end
+end
+
+function compare(t1, t2)
+   return compare2(t1, t2, 1)
 end
 
 function parsenumberorlist(s, i)
@@ -80,7 +84,7 @@ function main()
       local s1 = assert(io.read())
       if not s1 then break end
       local s2 = assert(io.read())
-      if compare(parsepacket(s1), parsepacket(s2), 1) <= 0 then
+      if compare(parsepacket(s1), parsepacket(s2)) <= 0 then
          tot = tot + i
       end
       i = i + 1
