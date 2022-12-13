@@ -67,20 +67,6 @@ function parselist(s, i)
    return { d = t, i = i }
 end
 
--- function printlist(t)
---    if type(t) == "number" then
---       io.write(tostring(t))
---    else -- table
---       io.write('[')
---       for i, v in pairs(t) do
---          -- print(i, v, 'x')
---          if i > 1 then io.write(',') end
---          printlist(v)
---       end
---       io.write(']')
---    end
--- end
-
 function parsepacket(s)
    local x = parselist(s, 1)
    if not x or not x.d then print(s) end
@@ -106,7 +92,7 @@ function main()
    table.sort(t, function (t1, t2) return compare(t1, t2, 1) <= 0 end)
    local i = table.find(t, function (t) return compare(t, {{2}}, 1) == 0 end)
    local j = table.find(t, function (t) return compare(t, {{6}}, 1) == 0 end)
-   print(i * j)
+   return i * j
 end
 
-main()
+print(main())
