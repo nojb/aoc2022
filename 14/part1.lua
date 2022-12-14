@@ -73,10 +73,7 @@ end
 function main()
    local t, maxy = read()
    local i = 0
-   while true do
-      if not doround(t, maxy) then
-         break
-      end
+   while doround(t, maxy) do
       i = i + 1
    end
    return i
