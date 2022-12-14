@@ -55,20 +55,17 @@ end
 function doround(t, maxy)
    local x, y = 500, 0
    while true do
-      if y > maxy then return false end
-      if isset(t, x, y + 1) then
-         if isset(t, x - 1, y + 1) then
-            if isset(t, x + 1, y + 1) then
-               set(t, x, y)
-               return true
-            else
-               x, y = x + 1, y + 1
-            end
-         else
-            x, y = x - 1, y + 1
-         end
-      else
+      if y > maxy then
+         return false
+      elseif not isset(t, x, y + 1) then
          y = y + 1
+      elseif not isset(t, x - 1, y + 1) then
+         x, y = x - 1, y + 1
+      elseif not isset(t, x + 1, y + 1) then
+         x, y = x + 1, y + 1
+      else
+         set(t, x, y)
+         return true
       end
    end
 end
