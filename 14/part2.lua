@@ -8,10 +8,7 @@ function isset(t, x, y)
 end
 
 function swap(x, y)
-   local z = x
-   x = y
-   y = z
-   return x, y
+   return y, x
 end
 
 function setpath(t, x1, y1, x2, y2)
