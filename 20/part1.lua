@@ -51,6 +51,7 @@ function main()
    end
    local function get(i)
       local x = t[zero]
+      i = i % #t
       for _ = 1, i do
          x = x.next
       end
