@@ -140,7 +140,6 @@ function nextpos(t, i, x, y, o)
          elseif i == 3 then
             i, y = 1, N
          elseif i == 4 then
-            -- i = 3; y = x; x = 1; o = 0
             i, x, y, o = 3, 1, x, 0
          elseif i == 5 then
             i, y = 3, N
