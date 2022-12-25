@@ -44,14 +44,6 @@ end
 function main()
    local tot = 0
    for s in io.lines() do
-      -- do
-      --    local n = snafu2dec(s)
-      --    local s_ = dec2snafu(n)
-      --    if s_ ~= s then
-      --       print(s, n, s_, snafu2dec(s_))
-      --       assert(nil)
-      --    end
-      -- end
       tot = tot + snafu2dec(s)
    end
    print(dec2snafu(tot))
